@@ -7,7 +7,7 @@ var lastLinePrinted = null
 var fs = require('fs')
 
 //change this to true if you want to save
-var saveNeeded = true
+var saveNeeded = false
 
 var savenum
 var userFlags
@@ -188,7 +188,7 @@ async function quicktimeEvent(keypresses, delay, delayrandrange) {
 //NERDY MY OWN CODE ENDS HERE; everything from here is all yours
 
 async function main() {
-    await writeDelayed("\nThis is a sample story to show off this engine's functions! (Press any key to continue)")
+    await writeDelayed("\n\nThis is a sample story to show off this engine's functions! (Press any key to continue)")
     await awaitKeypress()
     await writeDelayed("\nThis is the writeDelayed(str) function, that writes out any string like this, giving it a small sense of being spoken and not just written out.")
     await writeDelayed("\nThis is best used for dialogues and such. However, if you notice, when this text stops, it waits for you to press a button before writing out the new line.")
@@ -224,21 +224,20 @@ async function main() {
 //OK ACTUALLY not really, a bit more of my code here
 async function start() {
     console.clear();
-    saves = []
     if(saveNeeded) {
+    saves = []
         
-        fs.access('./VSNsaves.json', fs.constants.F_OK, (err) => {
-            if(err) {
-                fs.writeFile('./VSNsaves.json', '[null, null, null]', function (err) {
-                    if (err) throw err;
-                    console.log('Made new save, hopefully works');
-                    saves = require('./VSNsaves.json')
-                  }); 
-            } else {
+    fs.access('./VSNsaves.json', fs.constants.F_OK, (err) => {
+        if(err) {
+            fs.writeFile('./VSNsaves.json', '[null, null, null]', function (err) {
+                if (err) throw err;
+                console.log('Made new save, hopefully works');
                 saves = require('./VSNsaves.json')
-            }
-          });
-    }
+              }); 
+        } else {
+            saves = require('./VSNsaves.json')
+        }
+    });
     var checksaveExists = function(givenSave) {if(givenSave === null) {return "Empty"} else {return givenSave.name}}
     await writeDelayed("Which save do you want to use?\n")
     await writeNonDelayed("1 - "+checksaveExists(saves[0])+"\n")
@@ -260,6 +259,7 @@ async function start() {
         userFlags = currSave.flags
         eval(currSave.currentFunc+'()')
     }
+} else {main()}
 }
 
 start()
