@@ -1,0 +1,26 @@
+{
+  "name": "foxirin",
+  "version": "1.0.0",
+  "description": "A node.js visual novel engine, built for variety.",
+  "main": "charinput.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thefoxbot/foxirin.git"
+  },
+  "keywords": [
+    "visualnovel",
+    "nodejs",
+    "js",
+    "engine",
+    "visual_novel"
+  ],
+  "author": "thefox",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thefoxbot/foxirin/issues"
+  },
+  "homepage": "https://github.com/thefoxbot/foxirin#readme"
+}
